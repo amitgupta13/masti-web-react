@@ -8,10 +8,10 @@ export const signup = userData => async dispatch => {
       "http://localhost:4000/auth/signup",
       userData
     );
-    console.log({ response });
+    dispatch({ type: SIGN_UP, payload: response.data });
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("profile", JSON.stringify(response.data.profile));
   } catch (e) {
-    console.log(e);
+    console.log(e.response.data);
   }
-
-  //   dispatch({ type: SIGN_UP, payload: response.data });
 };
