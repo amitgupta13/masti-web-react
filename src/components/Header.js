@@ -1,26 +1,48 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../actions";
 import "./Header.css";
 
-const Header = () => {
+const Header = ({ logout, token }) => {
+  const headerComponent = token ? (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li className="auth">
+        <Link to="/signup" onClick={logout}>
+          Logout
+        </Link>
+      </li>
+    </>
+  ) : (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li className="auth">
+        <Link to="/signup">Sign Up</Link>
+      </li>
+      <li className="auth">
+        <Link to="/signin">Sign In</Link>
+      </li>
+    </>
+  );
   return (
     <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li className="auth">
-          <Link to="/logout">Logout</Link>
-        </li>
-        <li className="auth">
-          <Link to="/signup">Sign Up</Link>
-        </li>
-        <li className="auth">
-          <Link to="/signin">Sign In</Link>
-        </li>
-      </ul>
+      <ul>{headerComponent}</ul>
     </div>
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Header);

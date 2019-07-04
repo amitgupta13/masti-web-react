@@ -2,8 +2,12 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { signup } from "../../actions";
 import { connect } from "react-redux";
+import history from "../../history";
 
 class Signup extends React.Component {
+  componentDidMount() {
+    if (localStorage.getItem("token")) history.push("/");
+  }
   renderError({ error, touched }) {
     if (touched && error)
       return (
@@ -25,6 +29,7 @@ class Signup extends React.Component {
   onSubmit = formValues => {
     this.props.signup(formValues);
   };
+
   render() {
     return (
       <form
@@ -66,12 +71,18 @@ const validate = ({ name, email, password }) => {
   return errors;
 };
 
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token
+  };
+};
+
 const formWrapper = reduxForm({
   form: "signup",
   validate
 })(Signup);
 
 export default connect(
-  null,
+  mapStateToProps,
   { signup }
 )(formWrapper);

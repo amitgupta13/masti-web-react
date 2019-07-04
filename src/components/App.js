@@ -6,6 +6,11 @@ import Home from "./Home";
 import Signup from "./auth/Signup";
 
 class App extends React.Component {
+  state = { auth: false };
+  isAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    if (token) this.setState({ auth: true });
+  };
   render() {
     return (
       <div>
