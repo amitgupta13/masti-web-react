@@ -1,4 +1,4 @@
-import { SIGN_UP, LOGOUT, SIGN_IN, CHECK_AUTH } from "./types";
+import { SIGN_UP, LOGOUT, SIGN_IN, CHECK_AUTH, PROFILE } from "./types";
 import axios from "axios";
 import history from "../history";
 
@@ -40,4 +40,20 @@ export const logout = () => dispatch => {
   localStorage.removeItem("profile");
   dispatch({ type: LOGOUT });
   history.push("/signup");
+};
+
+export const profile = token => async dispatch => {
+  try {
+    const response = await axios.get("http://localhost:4000/auth/profile", {
+      headers: {
+        "x-auth-token": token
+      }
+    });
+    console.log(response.data);
+    // dispatch({ type: PROFILE, payload: response.data });
+    // localStorage.setItem("profile", response.data);
+    history.push("/");
+  } catch (e) {
+    console.log(e.response.data);
+  }
 };

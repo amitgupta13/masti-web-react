@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
+  const [profile, setProfile] = useState({});
+  useEffect(() => {}, [profile]);
   return (
     <div>
       <h1>My portfolio</h1>
