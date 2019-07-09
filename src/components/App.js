@@ -6,6 +6,7 @@ import Home from "./Home";
 import Signup from "./auth/Signup";
 import { checkAuth } from "../actions";
 import { connect } from "react-redux";
+import Signin from "./auth/Signin";
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Header auth={this.props.auth} />
           <Route path="/" exact component={Home} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/signin" exact component={Signin} />
         </Router>
       </div>
     );

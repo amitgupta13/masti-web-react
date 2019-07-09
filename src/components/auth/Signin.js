@@ -27,7 +27,7 @@ class Signin extends React.Component {
     );
   };
   onSubmit = formValues => {
-    this.props.signup(formValues);
+    this.props.signin(formValues);
   };
 
   render() {
@@ -70,7 +70,7 @@ const mapStateToProps = state => {
 };
 
 const formWrapper = reduxForm({
-  form: "signup",
+  form: "signin",
   validate
 })(Signin);
 

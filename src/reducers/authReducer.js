@@ -9,12 +9,12 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_UP:
       return {
         ...state,
-        token: action.payload.token
+        token: action.payload
       };
     case SIGN_IN:
       return {
         ...state,
-        token: action.payload.token
+        token: action.payload
       };
     case CHECK_AUTH:
       return {
@@ -24,8 +24,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGOUT:
       return {
         ...state,
-        token: null,
-        profile: {}
+        token: null
       };
     default:
       return state;
