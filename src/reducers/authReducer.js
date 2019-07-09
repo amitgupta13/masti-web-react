@@ -1,8 +1,7 @@
-import { SIGN_UP, LOGOUT } from "../actions/types";
+import { SIGN_UP, LOGOUT, SIGN_IN, CHECK_AUTH } from "../actions/types";
 
 const INITIAL_STATE = {
-  token: null,
-  profile: {}
+  token: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,8 +9,17 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_UP:
       return {
         ...state,
-        token: action.payload.token,
-        profile: action.payload.profile
+        token: action.payload.token
+      };
+    case SIGN_IN:
+      return {
+        ...state,
+        token: action.payload.token
+      };
+    case CHECK_AUTH:
+      return {
+        ...state,
+        token: action.payload
       };
     case LOGOUT:
       return {

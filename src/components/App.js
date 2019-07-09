@@ -4,18 +4,18 @@ import { Router, Route } from "react-router-dom";
 import history from "../history";
 import Home from "./Home";
 import Signup from "./auth/Signup";
+import { checkAuth } from "../actions";
+import { connect } from "react-redux";
 
 class App extends React.Component {
-  state = { auth: false };
-  isAuthenticated = () => {
-    const token = localStorage.getItem("token");
-    if (token) this.setState({ auth: true });
-  };
+  componentDidMount() {
+    this.props.checkAuth();
+  }
   render() {
     return (
       <div>
         <Router history={history}>
-          <Header />
+          <Header auth={this.props.auth} />
           <Route path="/" exact component={Home} />
           <Route path="/signup" exact component={Signup} />
         </Router>
@@ -24,4 +24,13 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { checkAuth }
+)(App);
