@@ -1,7 +1,14 @@
-import { SIGN_UP, LOGOUT, SIGN_IN, CHECK_AUTH } from "../actions/types";
+import {
+  SIGN_UP,
+  LOGOUT,
+  SIGN_IN,
+  CHECK_AUTH,
+  PROFILE
+} from "../actions/types";
 
 const INITIAL_STATE = {
-  token: null
+  token: null,
+  profile: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,10 +28,16 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         token: action.payload
       };
+    case PROFILE:
+      return {
+        ...state,
+        profile: action.payload
+      };
     case LOGOUT:
       return {
         ...state,
-        token: null
+        token: null,
+        profile: {}
       };
     default:
       return state;

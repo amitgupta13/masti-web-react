@@ -49,10 +49,9 @@ export const profile = token => async dispatch => {
         "x-auth-token": token
       }
     });
-    console.log(response.data);
-    // dispatch({ type: PROFILE, payload: response.data });
-    // localStorage.setItem("profile", response.data);
-    history.push("/");
+    dispatch({ type: PROFILE, payload: response.data });
+    localStorage.setItem("profile", JSON.stringify(response.data));
+    // history.push("/");
   } catch (e) {
     console.log(e.response.data);
   }

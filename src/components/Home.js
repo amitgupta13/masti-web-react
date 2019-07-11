@@ -1,15 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { profile } from "../actions";
 
-const Home = () => {
-  const [profile, setProfile] = useState({});
-  useEffect(() => {}, [profile]);
+const Home = ({ profile, token, profileData }) => {
+  useEffect(() => {
+    if (token !== "") {
+      profile(token);
+    }
+  }, [token]);
   return (
     <div>
       <h1>My portfolio</h1>
-      <strong>Name: </strong> Amit Kumar Gupta
+      <strong>Name: </strong> {profileData.name}
       <div />
     </div>
   );
 };
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+    profileData: state.auth.profile
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { profile }
+)(Home);
