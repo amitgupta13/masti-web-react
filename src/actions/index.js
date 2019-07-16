@@ -8,7 +8,7 @@ export const signup = userData => async dispatch => {
       "http://localhost:4000/auth/signup",
       userData
     );
-    dispatch({ type: SIGN_UP, payload: response.data });
+    dispatch({ type: SIGN_UP, payload: response.data.token });
     localStorage.setItem("token", response.data.token);
     history.push("/");
   } catch (e) {

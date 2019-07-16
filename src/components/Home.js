@@ -4,7 +4,7 @@ import { profile } from "../actions";
 
 const Home = ({ profile, token, profileData }) => {
   useEffect(() => {
-    if (token !== "") {
+    if (token) {
       profile(token);
     }
   }, [token]);
